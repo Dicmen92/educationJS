@@ -58,18 +58,32 @@ start();
 
     detectLevel();  
 
+    let optionalExpensesAnswer;
+
     function chooseOptExpenses(){
       for (let i = 0; i < 3; i++) {
-        let optionalExpensesAnswer = prompt('Статья необязательных расходов?');
+        optionalExpensesAnswer = prompt('Статья необязательных расходов?');
+
+        while(!isNaN(optionalExpensesAnswer) || optionalExpensesAnswer == '' || optionalExpensesAnswer == null) {
+          optionalExpensesAnswer = prompt('Статья необязательных расходов?');        
+        }
 
             if ((typeof(optionalExpensesAnswer) === 'string') && (typeof(optionalExpensesAnswer)) != null && optionalExpensesAnswer != '') {
               appData.optionalExpenses[i + 1] = optionalExpensesAnswer;           
             } else {
-  
-            }
+
+            }          
       }
     }
 
     chooseOptExpenses();
+    
+    function showAppData() {
+      for (let key in appData) {
+        console.log('Наша программа включает в себя данные:' + key + ' = ' + appData[key]);
+      }
+    }    
+
+    showAppData();
 
     console.log(appData);
