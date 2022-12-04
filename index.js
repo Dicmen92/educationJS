@@ -25,7 +25,7 @@ start();
     function chooseExpenses() {
       for (let i = 0; i < 2; i++) {
         let expensesQuestion = prompt('Введите обязательную статью расходов в этом месяце'),
-            expensesAnswer = prompt('Во сколько обойдется?');
+            expensesAnswer = +prompt('Во сколько обойдется?');
            
             if ((typeof(expensesQuestion) === 'string') && (typeof(expensesQuestion)) != null && (typeof(expensesAnswer)) != null && expensesQuestion != '' && expensesAnswer != '') {
               appData.expenses[expensesQuestion] = expensesAnswer;           
@@ -38,13 +38,38 @@ start();
     chooseExpenses();
     
     function detectDayBudget() {
-      let budgetDay = (appData.budgetData / 30).toFixed();
-      alert("Ваш ежедневный бюджет составляет: " + budgetDay);
+      appData.budgetDay = (appData.budgetData / 30).toFixed();
+      alert("Ваш ежедневный бюджет составляет: " + appData.budgetDay);
     }
 
     detectDayBudget();
 
-    
-       
+    function detectLevel() {
+      if (appData.budgetDay > 0 && appData.budgetDay < 20000) {
+        alert('Ваш заработок в ' + appData.budgetDay + ' считается минимальным')
+      } else if (appData.budgetDay >= 20000 && appData.budgetDay < 50000) {
+        alert('Ваш заработок в ' + appData.budgetDay + ' считается средним')
+      } else if (appData.budgetDay >= 50000) {
+        alert('Ваш заработок в ' + appData.budgetDay + ' считается большим')
+      } else {
+        alert('что-то пошло не так')
+      }
+    }
+
+    detectLevel();  
+
+    function chooseOptExpenses(){
+      for (let i = 0; i < 3; i++) {
+        let optionalExpensesAnswer = prompt('Статья необязательных расходов?');
+
+            if ((typeof(optionalExpensesAnswer) === 'string') && (typeof(optionalExpensesAnswer)) != null && optionalExpensesAnswer != '') {
+              appData.optionalExpenses[i + 1] = optionalExpensesAnswer;           
+            } else {
+  
+            }
+      }
+    }
+
+    chooseOptExpenses();
 
     console.log(appData);
